@@ -1,15 +1,10 @@
 @extends('app')
-@push('styles')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Personalized Quizzes – {{ $appName }}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@section('title', 'Personalized Quizzes – StudyGenie AI')
+
+@push('styles')
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --violet:  #7c3aed;
       --violet-d:#5b21b6;
@@ -157,10 +152,10 @@
       .hero { padding: 110px 4% 60px; }
       .nav-links { display: none; }
     }
-  </style>
-</head>
-<body>
+</style>
+@endpush
 
+@section('content')
 <nav>
   <a href="/" class="logo">🚀 {{ $appName }}</a>
   <ul class="nav-links">
@@ -316,14 +311,14 @@
   <p>Let StudyGenie's adaptive quizzes pinpoint exactly what you need to study — and get you there faster.</p>
   <button class="btn-white">Take Your First Quiz Free →</button>
 </section>
+@endsection
 
-
+@push('scripts')
 <script>
-  const reveals = document.querySelectorAll('.reveal');
+const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 90); });
   }, { threshold: 0.08 });
   reveals.forEach(r => io.observe(r));
 </script>
-</body>
-</html>
+@endpush

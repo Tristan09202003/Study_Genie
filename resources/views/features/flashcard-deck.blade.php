@@ -1,15 +1,10 @@
 @extends('app')
 
+@section('title', 'Smart Flashcard Deck – StudyGenie AI')
+
 @push('styles')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Smart Flashcard Deck – {{ $appName }}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --amber:   #d97706;
       --amber-d: #b45309;
@@ -112,10 +107,10 @@
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: none; }
     @media (max-width: 900px) { .srs-section { grid-template-columns: 1fr; gap: 3rem; } .steps { grid-template-columns: 1fr; } .hero { padding: 110px 4% 60px; } .nav-links { display: none; } }
-  </style>
-</head>
-<body>
+</style>
+@endpush
 
+@section('content')
 <nav>
   <a href="/" class="logo">🚀 {{ $appName }}</a>
   <ul class="nav-links">
@@ -241,12 +236,14 @@
   <p>Let StudyGenie's SRS engine build lasting knowledge from your study materials — automatically.</p>
   <button class="btn-white">Build Your Flashcard Deck →</button>
 </section>
+@endsection
+
+@push('scripts')
 <script>
-  const reveals = document.querySelectorAll('.reveal');
+const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 90); });
   }, { threshold: 0.08 });
   reveals.forEach(r => io.observe(r));
 </script>
-</body>
-</html>
+@endpush
