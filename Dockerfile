@@ -11,5 +11,9 @@ ENV LOG_CHANNEL=stderr
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN composer install --no-dev --optimize-autoloader
+RUN php artisan optimize:clear && \
+    php artisan config:cache && \
+    php artisan route:cache && \
+    php artisan view:cache
 
 CMD ["/start.sh"]
